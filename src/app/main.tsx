@@ -2,6 +2,7 @@ import { client } from "./client";
 import { ConnectButton } from "thirdweb/react";
 import { createWallet } from "thirdweb/wallets";
 import { useActiveAccount } from "thirdweb/react";
+import SuperchainDeposit from "./SuperchainDeposit";
 
 const wallets = [createWallet("io.metamask")];
 
@@ -37,6 +38,7 @@ export function Main() {
         theme={"dark"}
         connectModal={{ size: "compact" }}
       />
+      {account?.address && <SuperchainDeposit address={account?.address} />}
     </>
   );
 }
