@@ -4,6 +4,7 @@ import { createWallet } from "thirdweb/wallets";
 import { useActiveAccount } from "thirdweb/react";
 import SuperchainDeposit from "./SuperchainDeposit";
 import Review from "./Review";
+import ReivewList from "./ReviewList";
 
 const wallets = [createWallet("io.metamask")];
 
@@ -40,6 +41,7 @@ export function Main() {
       />
       {account?.address && <SuperchainDeposit address={account?.address} />}
       <Review account={account} />
+      <ReivewList />
     </>
   );
 }
