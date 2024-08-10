@@ -3,6 +3,7 @@ import { ConnectButton } from "thirdweb/react";
 import { createWallet } from "thirdweb/wallets";
 import { useActiveAccount } from "thirdweb/react";
 import SuperchainDeposit from "./SuperchainDeposit";
+import Review from "./Review";
 
 const wallets = [createWallet("io.metamask")];
 
@@ -23,7 +24,6 @@ const LinkButton = ({ url, text }) => {
 
 export function Main() {
   const account = useActiveAccount();
-  console.log("Account: ", account);
   return (
     <>
       <LinkButton
@@ -39,6 +39,7 @@ export function Main() {
         connectModal={{ size: "compact" }}
       />
       {account?.address && <SuperchainDeposit address={account?.address} />}
+      <Review account={account} />
     </>
   );
 }
