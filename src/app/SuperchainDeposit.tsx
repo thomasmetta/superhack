@@ -11,9 +11,14 @@ const SuperchainDeposit = ({ address }) => {
         const response = await axios.get(
           `https://explorer-rising-impact-3e40rbadm1.t.conduit.xyz/api/v2/addresses/${address}/internal-transactions`
         );
-        const filteredTransactions = response.data.items.filter(
-          (tx) => tx.from.implementation_address === IMPLEMENTATION_ADDRESS
-        );
+        const filteredTransactions = response.data.items.filter((tx) => {
+          if (tx.from.implementations && tx.from.implementations.length > 0) {
+            return tx.from.implementations.some(
+              (impl) => impl.address === IMPLEMENTATION_ADDRESS
+            );
+          }
+          return false;
+        });
         setTransactions(filteredTransactions);
       } catch (error) {
         console.error("Error fetching transactions:", error);
