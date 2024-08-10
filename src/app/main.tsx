@@ -40,8 +40,8 @@ export function Main() {
         connectModal={{ size: "compact" }}
       />
       {account?.address && <SuperchainDeposit address={account?.address} />}
-      <Review account={account} />
       <ReivewList />
+      <Review account={account} />
     </>
   );
 }

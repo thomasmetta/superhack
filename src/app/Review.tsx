@@ -47,20 +47,27 @@ const SubmitReviewButton = ({ account }) => {
   };
 
   return (
-    <div>
-      <textarea
-        placeholder="Write your review here..."
-        value={review}
-        onChange={(e) => setReview(e.target.value)}
-        rows="4"
-        cols="50"
-      />
-      <br />
-      <button onClick={submitReview} disabled={isLoading || !review}>
-        {isLoading ? "Submitting..." : "Submit Review"}
-      </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
+    <div className="container mx-auto px-4 py-6">
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <textarea
+          placeholder="Write your review here..."
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+          rows="4"
+          className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          onClick={submitReview}
+          disabled={isLoading || !review}
+          className={`px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
+            isLoading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+          } transition`}
+        >
+          {isLoading ? "Submitting..." : "Submit Review"}
+        </button>
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {success && <p className="text-green-500 mt-2">{success}</p>}
+      </div>
     </div>
   );
 };
