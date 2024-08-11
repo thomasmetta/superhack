@@ -29,7 +29,7 @@ const ETHBalance = ({ address }) => {
     };
 
     fetchBalances();
-  }, []);
+  }, [address]);
   return (
     <div className="p-4">
       <div className="flex space-x-4 justify-center">

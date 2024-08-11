@@ -94,7 +94,7 @@ const SubmitReviewButton = ({ account }) => {
         ) : (
           <p className="mb-4 text-green-500 flex items-center">
             <span className="mr-2 text-xl">✅</span>
-            You can now submit your review.
+            You can now submit your review on ReviewChain.
           </p>
         )}
         <textarea

@@ -47,7 +47,8 @@ const ReadReviews = () => {
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-4">Reviews</h1>
       <p className="mt-4 text-gray-600 italic">
-        These reviews are submitted with proof of personhood using World ID
+        These reviews are submitted with proof of personhood using World ID on
+        ReviewChain
       </p>
       {loading && <p className="text-gray-600">Loading reviews...</p>}
       {error && <p className="text-red-500">{error}</p>}
