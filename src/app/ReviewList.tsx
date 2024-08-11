@@ -47,8 +47,15 @@ const ReadReviews = () => {
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-4">Reviews</h1>
       <p className="mt-4 text-gray-600 italic">
-        These reviews are submitted with proof of personhood using World ID on
-        ReviewChain
+        These reviews are submitted with proof of personhood using World ID on{" "}
+        <a
+          href="https://explorer-rising-impact-3e40rbadm1.t.conduit.xyz" // Replace with the actual URL for ReviewChain
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:underline"
+        >
+          ReviewChain
+        </a>
       </p>
       {loading && <p className="text-gray-600">Loading reviews...</p>}
       {error && <p className="text-red-500">{error}</p>}
