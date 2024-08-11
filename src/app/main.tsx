@@ -6,6 +6,7 @@ import SuperchainDeposit from "./SuperchainDeposit";
 import SubmitReview from "./SubmitReview";
 import ReivewList from "./ReviewList";
 import AddChainButton from "./AddChainButton";
+import EthBalance from "./EthBalance";
 
 const wallets = [createWallet("io.metamask")];
 
@@ -43,6 +44,7 @@ export function Main() {
           connectModal={{ size: "compact" }}
         />
       </div>
+      {account?.address && <EthBalance address={account?.address} />}
       {account?.address && <SuperchainDeposit address={account?.address} />}
       <ReivewList />
       <SubmitReview account={account} />
