@@ -9,6 +9,7 @@ import { client } from "./client";
 import { VerificationLevel, IDKitWidget, useIDKit } from "@worldcoin/idkit";
 import type { ISuccessResult } from "@worldcoin/idkit";
 import { verify } from "./actions/verify";
+import { useSwitchActiveWalletChain } from "thirdweb/react";
 
 const SubmitReviewButton = ({ account }) => {
   const app_id = process.env.NEXT_PUBLIC_WLD_APP_ID as `app_${string}`;
@@ -25,12 +26,15 @@ const SubmitReviewButton = ({ account }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const switchChain = useSwitchActiveWalletChain();
 
   const submitReview = async () => {
     const myChain = defineChain({
       id: "59449",
       rpc: "https://rpc-rising-impact-3e40rbadm1.t.conduit.xyz",
     });
+
+    await switchChain(myChain);
 
     const contract = getContract({
       address: "0xeB424584a38b4fd9E4F894A8CBaA0b969125526D",
