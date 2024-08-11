@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddNetworkButton = () => {
+const AddNetworkButton = ({ className }) => {
   const handleAddNetwork = async () => {
     try {
       await window.ethereum.request({
@@ -29,10 +29,7 @@ const AddNetworkButton = () => {
   };
 
   return (
-    <button
-      onClick={handleAddNetwork}
-      className="bg-blue-500 text-white p-2 rounded"
-    >
+    <button onClick={handleAddNetwork} className={className}>
       Add ReviewChain to MetaMask
     </button>
   );

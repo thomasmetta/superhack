@@ -10,16 +10,13 @@ import EthBalance from "./EthBalance";
 
 const wallets = [createWallet("io.metamask")];
 
-const LinkButton = ({ url, text }) => {
+const LinkButton = ({ url, text, className }) => {
   const handleClick = () => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <button
-      className="border border-black rounded-md p-1"
-      onClick={handleClick}
-    >
+    <button className={className} onClick={handleClick}>
       {text}
     </button>
   );
@@ -30,14 +27,15 @@ export function Main() {
   return (
     <>
       <ReivewList />
-      <div className="flex flex-col space-y-4 max-w-md mx-auto">
+      <div className="flex flex-row space-x-4 max-w-md mx-auto">
         <LinkButton
           url={
             "https://rising-impact-3e40rbadm1-960cc017d57fe9ce.testnets.rollbridge.app/"
           }
           text="Bridge from ETH Sepolia to ReviewChain"
+          className="min-w-[200px] px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600"
         />
-        <AddChainButton />
+        <AddChainButton className="min-w-[200px] px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600" />
         <ConnectButton
           client={client}
           wallets={wallets}
