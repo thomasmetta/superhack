@@ -5,6 +5,7 @@ import { useActiveAccount } from "thirdweb/react";
 import SuperchainDeposit from "./SuperchainDeposit";
 import SubmitReview from "./SubmitReview";
 import ReivewList from "./ReviewList";
+import AddChainButton from "./AddChainButton";
 
 const wallets = [createWallet("io.metamask")];
 
@@ -31,8 +32,9 @@ export function Main() {
         url={
           "https://rising-impact-3e40rbadm1-960cc017d57fe9ce.testnets.rollbridge.app/"
         }
-        text="Bridge to Review chain"
+        text="Bridge from ETH Sepolia to ReviewChain"
       />
+      <AddChainButton />
       <ConnectButton
         client={client}
         wallets={wallets}
