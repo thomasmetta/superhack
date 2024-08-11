@@ -97,6 +97,18 @@ const SubmitReviewButton = ({ account }) => {
         >
           {isLoading ? "Submitting..." : "Submit Review"}
         </button>
+        <p className="mt-2 text-gray-500 text-sm">
+          Note: You can verify using this{" "}
+          <a
+            href="https://simulator.worldcoin.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline"
+          >
+            simulator
+          </a>
+          .
+        </p>
         {error && <p className="text-red-500 mt-2">{error}</p>}
         {success && <p className="text-green-500 mt-2">{success}</p>}
       </div>
