@@ -30,6 +30,9 @@ const ETHBalance = ({ address }) => {
 
     fetchBalances();
   }, [address]);
+
+  const canSubmitReview = balance2 !== null && parseFloat(balance2) > 0;
+
   return (
     <div className="p-4">
       <div className="flex space-x-4 justify-center">
@@ -45,6 +48,16 @@ const ETHBalance = ({ address }) => {
             {balance2 !== null ? `${balance2} ETH` : "Loading..."}
           </p>
         </div>
+      </div>
+      <div className="mt-4 flex justify-center">
+        <p
+          className={`text-lg font-semibold ${
+            canSubmitReview ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {!canSubmitReview &&
+            "You can only submit a review if you have bridged ETH into ReviewChain."}
+        </p>
       </div>
     </div>
   );

@@ -29,6 +29,7 @@ export function Main() {
   const account = useActiveAccount();
   return (
     <>
+      <ReivewList />
       <div className="flex flex-col space-y-4 max-w-md mx-auto">
         <LinkButton
           url={
@@ -46,7 +47,6 @@ export function Main() {
       </div>
       {account?.address && <EthBalance address={account?.address} />}
       {account?.address && <SuperchainDeposit address={account?.address} />}
-      <ReivewList />
       <SubmitReview account={account} />
     </>
   );

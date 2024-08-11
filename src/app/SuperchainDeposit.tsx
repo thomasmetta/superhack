@@ -40,37 +40,43 @@ const SuperchainDeposit = ({ address }) => {
   return (
     <div className="container mx-auto px-4">
       <h1 className="text-4xl font-bold text-gray-800">
-        Bridge Deposit transaction
+        Bridge Deposit Transaction
       </h1>
-      <table className="min-w-full bg-white border border-gray-300">
-        <thead>
-          <tr className="bg-gray-200 text-gray-700">
-            <th className="py-2 px-4 border-b">Block</th>
-            <th className="py-2 px-4 border-b">Timestamp (PST)</th>
-            <th className="py-2 px-4 border-b">Transaction Hash</th>
-            <th className="py-2 px-4 border-b">Value (Ether)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map((tx) => (
-            <tr key={tx.transaction_hash} className="text-gray-700">
-              <td className="py-2 px-4 border-b">{tx.block}</td>
-              <td className="py-2 px-4 border-b">{formatDate(tx.timestamp)}</td>
-              <td className="py-2 px-4 border-b">
-                <a
-                  href={`https://explorer-rising-impact-3e40rbadm1.t.conduit.xyz/tx/${tx.transaction_hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
-                >
-                  {tx.transaction_hash}
-                </a>
-              </td>
-              <td className="py-2 px-4 border-b">{formatValue(tx.value)}</td>
+      {transactions.length > 0 ? (
+        <table className="min-w-full bg-white border border-gray-300">
+          <thead>
+            <tr className="bg-gray-200 text-gray-700">
+              <th className="py-2 px-4 border-b">Block</th>
+              <th className="py-2 px-4 border-b">Timestamp (PST)</th>
+              <th className="py-2 px-4 border-b">Transaction Hash</th>
+              <th className="py-2 px-4 border-b">Value (Ether)</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {transactions.map((tx) => (
+              <tr key={tx.transaction_hash} className="text-gray-700">
+                <td className="py-2 px-4 border-b">{tx.block}</td>
+                <td className="py-2 px-4 border-b">
+                  {formatDate(tx.timestamp)}
+                </td>
+                <td className="py-2 px-4 border-b">
+                  <a
+                    href={`https://explorer-rising-impact-3e40rbadm1.t.conduit.xyz/tx/${tx.transaction_hash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    {tx.transaction_hash}
+                  </a>
+                </td>
+                <td className="py-2 px-4 border-b">{formatValue(tx.value)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-gray-600">No deposit transactions found.</p>
+      )}
     </div>
   );
 };
