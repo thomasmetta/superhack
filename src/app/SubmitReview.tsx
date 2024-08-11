@@ -4,17 +4,23 @@ import {
   sendTransaction,
   getContract,
   prepareContractCall,
-  useActiveAccount,
 } from "thirdweb";
 import { client } from "./client";
-
-const contractAddress = "0xeB424584a38b4fd9E4F894A8CBaA0b969125526D";
-const contractABI = [
-  // Only include the ABI for the submitReview function
-  "function submitReview(string _content) external",
-];
+import { VerificationLevel, IDKitWidget, useIDKit } from "@worldcoin/idkit";
+import type { ISuccessResult } from "@worldcoin/idkit";
+import { verify } from "./actions/verify";
 
 const SubmitReviewButton = ({ account }) => {
+  const app_id = process.env.NEXT_PUBLIC_WLD_APP_ID as `app_${string}`;
+  const action = process.env.NEXT_PUBLIC_WLD_ACTION;
+
+  if (!app_id) {
+    throw new Error("app_id is not set in environment variables!");
+  }
+  if (!action) {
+    throw new Error("action is not set in environment variables!");
+  }
+
   const [review, setReview] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -46,8 +52,34 @@ const SubmitReviewButton = ({ account }) => {
     });
   };
 
+  const { setOpen } = useIDKit();
+
+  const onSuccess = (result: ISuccessResult) => {
+    submitReview();
+  };
+
+  const handleProof = async (result: ISuccessResult) => {
+    console.log(
+      "Proof received from IDKit, sending to backend:\n",
+      JSON.stringify(result)
+    ); // Log the proof from IDKit to the console for visibility
+    const data = await verify(result);
+    if (data.success) {
+      console.log("Successful response from backend:\n", JSON.stringify(data)); // Log the response from our backend for visibility
+    } else {
+      throw new Error(`Verification failed: ${data.detail}`);
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-6">
+      <IDKitWidget
+        action={action}
+        app_id={app_id}
+        onSuccess={onSuccess}
+        handleVerify={handleProof}
+        verification_level={VerificationLevel.Device}
+      />
       <div className="bg-white p-6 rounded-lg shadow-md">
         <textarea
           placeholder="Write your review here..."
@@ -57,7 +89,7 @@ const SubmitReviewButton = ({ account }) => {
           className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
-          onClick={submitReview}
+          onClick={() => setOpen(true)}
           disabled={isLoading || !review}
           className={`px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
             isLoading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
