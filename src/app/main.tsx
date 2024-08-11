@@ -28,19 +28,21 @@ export function Main() {
   const account = useActiveAccount();
   return (
     <>
-      <LinkButton
-        url={
-          "https://rising-impact-3e40rbadm1-960cc017d57fe9ce.testnets.rollbridge.app/"
-        }
-        text="Bridge from ETH Sepolia to ReviewChain"
-      />
-      <AddChainButton />
-      <ConnectButton
-        client={client}
-        wallets={wallets}
-        theme={"dark"}
-        connectModal={{ size: "compact" }}
-      />
+      <div className="flex flex-col space-y-4 max-w-md mx-auto">
+        <LinkButton
+          url={
+            "https://rising-impact-3e40rbadm1-960cc017d57fe9ce.testnets.rollbridge.app/"
+          }
+          text="Bridge from ETH Sepolia to ReviewChain"
+        />
+        <AddChainButton />
+        <ConnectButton
+          client={client}
+          wallets={wallets}
+          theme={"dark"}
+          connectModal={{ size: "compact" }}
+        />
+      </div>
       {account?.address && <SuperchainDeposit address={account?.address} />}
       <ReivewList />
       <SubmitReview account={account} />

@@ -33,7 +33,7 @@ const AddNetworkButton = () => {
       onClick={handleAddNetwork}
       className="bg-blue-500 text-white p-2 rounded"
     >
-      Add ReviewChain to Network to MetaMask
+      Add ReviewChain to MetaMask
     </button>
   );
 };

@@ -81,6 +81,18 @@ const SubmitReviewButton = ({ account }) => {
         verification_level={VerificationLevel.Device}
       />
       <div className="bg-white p-6 rounded-lg shadow-md">
+        {!account ? (
+          <p className="mb-4 text-red-500 flex items-center">
+            <span className="mr-2 text-xl">❌</span>
+            Please connect your wallet and bridge to ReviewChain before
+            submitting a review.
+          </p>
+        ) : (
+          <p className="mb-4 text-green-500 flex items-center">
+            <span className="mr-2 text-xl">✅</span>
+            You can now submit your review.
+          </p>
+        )}
         <textarea
           placeholder="Write your review here..."
           value={review}
@@ -90,9 +102,11 @@ const SubmitReviewButton = ({ account }) => {
         />
         <button
           onClick={() => setOpen(true)}
-          disabled={isLoading || !review}
+          disabled={isLoading || !review || !account}
           className={`px-4 py-2 text-white font-semibold rounded-lg shadow-md ${
-            isLoading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+            isLoading || !account
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600"
           } transition`}
         >
           {isLoading ? "Submitting..." : "Submit Review"}
