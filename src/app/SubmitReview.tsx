@@ -112,7 +112,7 @@ const SubmitReviewButton = ({ account }) => {
           {isLoading ? "Submitting..." : "Submit Review"}
         </button>
         <p className="mt-2 text-gray-500 text-sm">
-          Note: You can verify using this{" "}
+          Note: You can verify using this World ID{" "}
           <a
             href="https://simulator.worldcoin.org/"
             target="_blank"
